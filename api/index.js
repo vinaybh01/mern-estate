@@ -4,9 +4,12 @@ import dotenv from "dotenv";
 import userRouter from "./routes/userRoute.js";
 import authRouter from "./routes/authRoute.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+const app = express();
+
 dotenv.config();
 
-const app = express();
+app.use(cookieParser());
 
 app.use(cors());
 
