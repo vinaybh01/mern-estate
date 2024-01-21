@@ -16,6 +16,7 @@ import {
   deleteUserSuccess,
 } from "../redux/user/userslice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -28,6 +29,7 @@ export default function Profile() {
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (file) {
@@ -120,6 +122,12 @@ export default function Profile() {
     }
   };
 
+  const handleSignout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("persist:root");
+    window.location.href = "/signin";
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -187,7 +195,9 @@ export default function Profile() {
         >
           Delete account
         </span>{" "}
-        <span className="text-red-700 cursor-pointer">Sign out</span>
+        <span onClick={handleSignout} className="text-red-700 cursor-pointer">
+          Sign out
+        </span>
       </div>
 
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
