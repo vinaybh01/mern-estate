@@ -37,7 +37,7 @@ export default function SignIn() {
         return;
       }
       localStorage.setItem("access_token", data.token);
-      dispatch(signInSuccess(data));
+      dispatch(signInSuccess({ token: data.token, user: data.user }));
       navigate("/");
     } catch (error) {
       dispatch(signInFailure(error.message));
