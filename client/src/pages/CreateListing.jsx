@@ -7,8 +7,10 @@ import {
 import React, { useState } from "react";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
@@ -20,7 +22,7 @@ export default function CreateListing() {
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
-    discountPrice: 10,
+    discountPrice: 0,
     offer: false,
     parking: false,
     furnished: false,
@@ -126,6 +128,10 @@ export default function CreateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (formData.imageUrls.length < 1)
+        return setError("You must upload at least one image");
+      if (+formData.regularPrice < +formData.discountPrice)
+        return setError("Discount price must be lower than regular price");
       setLoading(true);
       setError(false);
       const token = localStorage.getItem("access_token");
@@ -270,7 +276,7 @@ export default function CreateListing() {
                 type="number"
                 id="regularPrice"
                 min="50"
-                max="100000"
+                max="1000000"
                 required
                 className="p-3 border border-gray-300 rounded-lg"
                 onChange={handleChange}
@@ -281,22 +287,24 @@ export default function CreateListing() {
                 <span className="text-xs">($ / month)</span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                id="discountPrice"
-                min="10"
-                max="100000"
-                required
-                className="p-3 border border-gray-300 rounded-lg"
-                onChange={handleChange}
-                value={formData.discountPrice}
-              />
-              <div className="flex flex-col items-center">
-                <p>Discounted price</p>
-                <span className="text-xs">($ / month)</span>
+            {formData.offer && (
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  id="discountPrice"
+                  min="0"
+                  max="10000000"
+                  required
+                  className="p-3 border border-gray-300 rounded-lg"
+                  onChange={handleChange}
+                  value={formData.discountPrice}
+                />
+                <div className="flex flex-col items-center">
+                  <p>Discounted price</p>
+                  <span className="text-xs">($ / month)</span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div className="flex flex-col flex-1 gap-4">
