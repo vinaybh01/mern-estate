@@ -46,13 +46,12 @@ export const signin = async (req, res, next) => {
 
 export const google = async (req, res, next) => {
   const { name, email, photo } = req.body;
-  console.log("name", name, email, photo);
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       const { password: pass, ...rest } = user._doc;
-      res.cookie("access_token", token).status(200).json(rest);
+      res.status(200).json({ token, user: rest });
     } else {
       const generatedPassword = Math.random().toString(36).slice(-8);
       console.log("password", generatedPassword);
@@ -68,7 +67,7 @@ export const google = async (req, res, next) => {
       console.log(newUser);
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       const { password: pass, ...rest } = user._doc;
-      res.cookie("access_token", token).status(200).json(rest);
+      res.status(200).json({ token, user: rest });
     }
   } catch (err) {
     console.log(err);

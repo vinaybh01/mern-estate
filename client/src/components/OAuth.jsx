@@ -27,6 +27,8 @@ function OAuth() {
       });
       const data = await res.json();
       console.log(data);
+
+      localStorage.setItem("access_token", data.token);
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (err) {
