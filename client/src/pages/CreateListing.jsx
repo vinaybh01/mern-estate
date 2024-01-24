@@ -147,6 +147,7 @@ export default function CreateListing() {
       const data = await res.json();
       console.log(data);
       setLoading(false);
+      navigate(`/listing/${currentUser._id}`);
       if (data.success === false) {
         setError(data.message);
       }
