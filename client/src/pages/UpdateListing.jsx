@@ -168,7 +168,7 @@ export default function UpdateListing() {
       const data = await res.json();
       console.log(data);
       setLoading(false);
-      navigate(`/listing/${currentUser._id}`);
+      navigate(`/listing/${listingId}`);
       if (data.success === false) {
         setError(data.message);
       }
