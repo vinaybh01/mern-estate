@@ -59,7 +59,6 @@ export default function CreateListing() {
       setUploading(false);
     }
   };
-  console.log(formData);
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -73,7 +72,7 @@ export default function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(progress, "done");
+          // console.log(progress, "done");
         },
         (error) => {
           reject(error);
@@ -93,8 +92,6 @@ export default function CreateListing() {
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
-
-  console.log(files);
 
   const handleChange = (e) => {
     if (e.target.id === "sale" || e.target.id === "rent") {
@@ -135,7 +132,6 @@ export default function CreateListing() {
       setLoading(true);
       setError(false);
       const token = localStorage.getItem("access_token");
-      console.log(token);
       const res = await fetch("http://localhost:3000/api/listing/create", {
         method: "POST",
         headers: {
@@ -145,9 +141,8 @@ export default function CreateListing() {
         body: JSON.stringify({ ...formData, userRef: currentUser._id }),
       });
       const data = await res.json();
-      console.log(data);
       setLoading(false);
-      navigate(`/listing/${currentUser._id}`);
+      navigate(`/listing/${data._id}`);
       if (data.success === false) {
         setError(data.message);
       }
@@ -156,7 +151,6 @@ export default function CreateListing() {
       setError(err.message);
     }
   };
-  console.log(formData);
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
