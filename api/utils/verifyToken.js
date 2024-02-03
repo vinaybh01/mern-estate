@@ -3,9 +3,7 @@ import { errorHandler } from "./error.js";
 
 export const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
-  console.log(token);
   const realtoken = token.split(" ")[1];
-  console.log(realtoken);
   if (!token) return next(errorHandler(401, "Unauthorized"));
 
   jwt.verify(token.split(" ")[1], process.env.JWT_SECRET, (err, user) => {

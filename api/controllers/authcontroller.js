@@ -54,7 +54,6 @@ export const google = async (req, res, next) => {
       res.status(200).json({ token, user: rest });
     } else {
       const generatedPassword = Math.random().toString(36).slice(-8);
-      console.log("password", generatedPassword);
       const hashedPassword = await bcrypt.hash(generatedPassword, 10);
       const newUser = new User({
         username: req.body.name.split(" ").join("").toLowerCase(),
@@ -62,15 +61,12 @@ export const google = async (req, res, next) => {
         password: hashedPassword,
         avatar: req.body.photo,
       });
-      console.log("newuser", newUser);
       await newUser.save();
-      console.log(newUser);
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       const { password: pass, ...rest } = user._doc;
       res.status(200).json({ token, user: rest });
     }
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
