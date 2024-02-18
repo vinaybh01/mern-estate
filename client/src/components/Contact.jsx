@@ -48,12 +48,12 @@ export default function Contact({ listing }) {
             className="w-full border p-3 rounded-lg"
           ></textarea>
 
-          <Link
-            to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
+          <a
+            href={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
             className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
           >
             Send Message
-          </Link>
+          </a>
         </div>
       )}
     </>
