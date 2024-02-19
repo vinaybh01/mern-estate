@@ -42,8 +42,19 @@ export default function SignUp() {
   };
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
+    <div className="p-10 m-4 rounded-lg  max-w-lg mx-auto bg-white">
+      <div className="flex justify-center">
+        <img
+          src="https://hsoab2c.blob.core.windows.net/staticui/brand_longandfoster/LF_Companies_Horizontal_RGB.jpg"
+          alt=""
+          width={"250px"}
+          height={"250px"}
+          className="m-4"
+        />
+      </div>
+      <p className="text-xl uppercase text-center font-semibold mb-3">
+        Sign Up
+      </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"

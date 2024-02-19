@@ -44,8 +44,20 @@ export default function SignIn() {
     }
   };
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
+    <div className="p-10 m-6 rounded-lg  max-w-lg mx-auto bg-white">
+      <div className="flex justify-center">
+        <img
+          src="https://hsoab2c.blob.core.windows.net/staticui/brand_longandfoster/LF_Companies_Horizontal_RGB.jpg"
+          alt=""
+          width={"300px"}
+          height={"300px"}
+          className=""
+        />
+      </div>
+      <p className="text-lg text-center font-semibold mt-7">Welcome!</p>
+      <p className="text-center mb-4">
+        To get started please signin to your account.
+      </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="email"
