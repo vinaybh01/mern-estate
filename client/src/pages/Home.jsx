@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <div>
       {/* top */}
-      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
+      {/* <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
           Find your next <span className="text-slate-500">perfect</span>
           <br />
@@ -72,10 +72,10 @@ export default function Home() {
         >
           Let's get started...
         </Link>
-      </div>
+      </div> */}
 
       {/* swiper */}
-      <Swiper navigation>
+      {/* <Swiper navigation>
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
@@ -90,22 +90,43 @@ export default function Home() {
               ></div>
             </SwiperSlide>
           ))}
-      </Swiper>
+      </Swiper> */}
+
+      <div class="relative">
+        <img
+          src="https://bt-wpstatic.freetls.fastly.net/wp-content/blogs.dir/10618/files/2021/12/HP-c57aa7f5540255d530afb43a83dfdab3f2998fde-scaled.jpg"
+          alt=""
+          class="mb-4"
+        />
+        <div class="absolute top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
+          <Link to={"/search"}>
+            <p class="font-bold mb-4 text-5xl text-[#A40D2C]">
+              Search. See. Love.
+            </p>
+            <p class="text-xl text-black ">
+              Your new home is just a virtual tour away. Browse all homes on the
+              market today and connect safely with a landlord.
+            </p>
+          </Link>
+        </div>
+      </div>
 
       {/* listing results for offer, sale and rent */}
 
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
         {offerListings && offerListings.length > 0 && (
           <div className="">
-            <div className="my-3">
+            <div className="my-3 flex justify-between">
               <h2 className="text-2xl font-semibold text-slate-600">
-                Recent offers
+                Our Featured Listings
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:underline"
                 to={"/search?offer=true"}
               >
-                Show more offers
+                <button className="text-[#A40D2C] text-base font-semibold bg-white p-2  border border-[#A40D2C] hover:text-white uppercase hover:bg-[#A40D2C]">
+                  Show More {">"}
+                </button>
               </Link>
             </div>
             <div className="flex flex-wrap gap-4">
