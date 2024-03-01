@@ -3,18 +3,18 @@ import { MdLocationOn } from "react-icons/md";
 
 export default function ListingItems({ list }) {
   return (
-    <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden  w-full sm:w-[300px] border border-gray-400">
+    <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden  w-full sm:w-[300px] border border-gray-400 hover:bg-[#E8EFFD]">
       <Link to={`/listing/${list._id}`}>
         <img
           src={list.imageUrls[0]}
           alt="list cover"
           className="h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300"
         />
-        <p className="truncate text-[15px] py-0.5 text-center text-white bg-[#02174A] box-border">
+        <p className="truncate text-[12px] sm:text-[15px] py-0.5 text-center text-white bg-[#02174A] box-border">
           {list.name}
         </p>
-        <div className="p-3 flex flex-col gap-2 w-full hover:bg-[#E8EFFD]">
-          <p className="text-black text-[23px] mt-2 font-semibold ">
+        <div className="p-3 flex flex-col gap-2 w-full ">
+          <p className="text-black text-[18px] sm:text-[23px] mt-2 font-semibold ">
             $
             {list.offer
               ? (list.regularPrice - list.discountPrice).toLocaleString("en-US")

@@ -57,7 +57,12 @@ export default function Listing() {
       )}
       {listing && !loading && !error && (
         <div>
-          <Swiper navigation>
+          <Swiper
+            navigation
+            spaceBetween={10}
+            slidesPerView={2}
+            style={{ width: "100%", height: "450px" }} // Adjust the height as needed
+          >
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
@@ -70,6 +75,7 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
+
           <div className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer">
             <FaShare
               className="text-slate-500"

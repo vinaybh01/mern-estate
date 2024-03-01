@@ -152,7 +152,7 @@ export default function CreateListing() {
     }
   };
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <main className="p-10 m-6 rounded-lg  max-w-4xl mx-auto bg-white">
       <h1 className="text-3xl font-semibold text-center my-7">
         Create a Listing
       </h1>
@@ -161,7 +161,7 @@ export default function CreateListing() {
           <input
             type="text"
             placeholder="Name"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg bg-[#F1F5F1] outline-none"
             id="name"
             maxLength="62"
             minLength="10"
@@ -172,7 +172,7 @@ export default function CreateListing() {
           <textarea
             type="text"
             placeholder="Description"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg bg-[#F1F5F1] outline-none"
             id="description"
             required
             onChange={handleChange}
@@ -181,7 +181,7 @@ export default function CreateListing() {
           <input
             type="text"
             placeholder="Address"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg bg-[#F1F5F1] outline-none"
             id="address"
             required
             onChange={handleChange}
@@ -192,7 +192,7 @@ export default function CreateListing() {
               <input
                 type="checkbox"
                 id="sale"
-                className="w-5"
+                className="w-5 bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 checked={formData.type === "sale"}
               />
@@ -202,7 +202,7 @@ export default function CreateListing() {
               <input
                 type="checkbox"
                 id="rent"
-                className="w-5"
+                className="w-5 bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 checked={formData.type === "rent"}
               />
@@ -212,7 +212,7 @@ export default function CreateListing() {
               <input
                 type="checkbox"
                 id="parking"
-                className="w-5"
+                className="w-5 bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 checked={formData.parking}
               />
@@ -222,7 +222,7 @@ export default function CreateListing() {
               <input
                 type="checkbox"
                 id="furnished"
-                className="w-5"
+                className="w-5 bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 checked={formData.furnished}
               />
@@ -232,7 +232,7 @@ export default function CreateListing() {
               <input
                 type="checkbox"
                 id="offer"
-                className="w-5"
+                className="w-5 bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 checked={formData.offer}
               />
@@ -247,7 +247,7 @@ export default function CreateListing() {
                 min="1"
                 max="10"
                 required
-                className="p-3 border border-gray-300 rounded-lg"
+                className="p-3 border border-gray-300 rounded-lg bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
@@ -260,7 +260,7 @@ export default function CreateListing() {
                 min="1"
                 max="10"
                 required
-                className="p-3 border border-gray-300 rounded-lg"
+                className="p-3 border border-gray-300 rounded-lg bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
@@ -273,7 +273,7 @@ export default function CreateListing() {
                 min="50"
                 max="1000000"
                 required
-                className="p-3 border border-gray-300 rounded-lg"
+                className="p-3 border border-gray-300 rounded-lg bg-[#F1F5F1] outline-none"
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
@@ -292,7 +292,7 @@ export default function CreateListing() {
                   min="0"
                   max="10000000"
                   required
-                  className="p-3 border border-gray-300 rounded-lg"
+                  className="p-3 border border-gray-300 rounded-lg bg-[#F1F5F1] outline-none"
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
@@ -326,7 +326,7 @@ export default function CreateListing() {
               onClick={handleImageUpload}
               type="button"
               disabled={uploading}
-              className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80"
+              className="p-3 text-[#A40D2C] border border-[#A40D2C] rounded uppercase hover:shadow-lg disabled:opacity-80"
             >
               {uploading ? "Uploading..." : "Upload"}{" "}
             </button>

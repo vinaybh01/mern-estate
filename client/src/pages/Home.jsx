@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import SwiperCore from "swiper";
-import "swiper/css/bundle";
 import ListingItems from "../components/ListingItems";
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-  SwiperCore.use([Navigation]);
   console.log(offerListings);
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
         const res = await fetch(
-          "http://localhost:3000/api/listing/get?offer=true&limit=3"
+          "http://localhost:3000/api/listing/get?offer=true&limit=4"
         );
         const data = await res.json();
         setOfferListings(data);
@@ -28,7 +23,7 @@ export default function Home() {
     const fetchRentListings = async () => {
       try {
         const res = await fetch(
-          "http://localhost:3000/api/listing/get?type=rent&limit=3"
+          "http://localhost:3000/api/listing/get?type=rent&limit=4"
         );
         const data = await res.json();
         setRentListings(data);
@@ -41,7 +36,7 @@ export default function Home() {
     const fetchSaleListings = async () => {
       try {
         const res = await fetch(
-          "http://localhost:3000/api/listing/get?type=sale&limit=3"
+          "http://localhost:3000/api/listing/get?type=sale&limit=4"
         );
         const data = await res.json();
         setSaleListings(data);
@@ -53,57 +48,18 @@ export default function Home() {
   }, []);
   return (
     <div>
-      {/* top */}
-      {/* <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          Find your next <span className="text-slate-500">perfect</span>
-          <br />
-          place with ease
-        </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          Elite Estates Hub is the best place to find your next perfect place to
-          live.
-          <br />
-          We have a wide range of properties for you to choose from.
-        </div>
-        <Link
-          to={"/search"}
-          className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
-        >
-          Let's get started...
-        </Link>
-      </div> */}
-
-      {/* swiper */}
-      {/* <Swiper navigation>
-        {offerListings &&
-          offerListings.length > 0 &&
-          offerListings.map((listing) => (
-            <SwiperSlide>
-              <div
-                style={{
-                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
-                  backgroundSize: "cover",
-                }}
-                className="h-[500px]"
-                key={listing._id}
-              ></div>
-            </SwiperSlide>
-          ))}
-      </Swiper> */}
-
-      <div class="relative">
+      <div className="relative">
         <img
           src="https://bt-wpstatic.freetls.fastly.net/wp-content/blogs.dir/10618/files/2021/12/HP-c57aa7f5540255d530afb43a83dfdab3f2998fde-scaled.jpg"
           alt=""
-          class="mb-4"
+          className="mb-4"
         />
-        <div class="absolute top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
+        <div className="absolute top-[120px] md:top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-['Roboto']">
           <Link to={"/search"}>
-            <p class="font-bold mb-4 text-5xl text-[#A40D2C]">
+            <p className="font-semibold sm:font-bold mb-1 sm:mb-4 text-lg sm:text-5xl text-[#A40D2C]">
               Search. See. Love.
             </p>
-            <p class="text-xl text-black ">
+            <p className="text-xs sm:text-xl text-[#02174A] font-normal sm:font-semibold w-[300px] sm:w-[550px]">
               Your new home is just a virtual tour away. Browse all homes on the
               market today and connect safely with a landlord.
             </p>
@@ -111,20 +67,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* listing results for offer, sale and rent */}
-
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+      <div className="max-w-7xl mx-1 sm:mx-auto p-[10px] sm:p-3 flex flex-col gap-8 my-1 sm:my-10">
         {offerListings && offerListings.length > 0 && (
           <div className="">
-            <div className="my-3 flex justify-between">
-              <h2 className="text-2xl font-semibold text-slate-600">
+            <div className="my-2 sm:my-5 flex justify-between ">
+              <h2 className="text-base sm:text-2xl  font-semibold text-slate-600">
                 Our Featured Listings
               </h2>
-              <Link
-                className="text-sm text-blue-800 hover:underline"
-                to={"/search?offer=true"}
-              >
-                <button className="text-[#A40D2C] text-base font-semibold bg-white p-2  border border-[#A40D2C] hover:text-white uppercase hover:bg-[#A40D2C]">
+              <Link className="" to={"/search?offer=true"}>
+                <button className="text-white sm:w-[128px] sm:h-[38px] w-[100px] h-[28px] sm:text-base text-xs font-semibold bg-[#A40D2C] p-1.5  border border-[#A40D2C] hover:text-[#A40D2C] uppercase hover:bg-white">
                   Show More {">"}
                 </button>
               </Link>
@@ -138,15 +89,17 @@ export default function Home() {
         )}
         {rentListings && rentListings.length > 0 && (
           <div className="">
-            <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
+            <div className="my-2 sm:my-5 flex justify-between">
+              <h2 className="text-base sm:text-2xl  font-semibold text-slate-600">
                 Recent places for rent
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:underline"
                 to={"/search?type=rent"}
               >
-                Show more places for rent
+                <button className="text-white sm:w-[128px] sm:h-[38px] w-[100px] h-[28px] sm:text-base text-xs font-semibold bg-[#A40D2C] p-1.5  border border-[#A40D2C] hover:text-[#A40D2C] uppercase hover:bg-white">
+                  Show More {">"}
+                </button>
               </Link>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -158,15 +111,17 @@ export default function Home() {
         )}
         {saleListings && saleListings.length > 0 && (
           <div className="">
-            <div className="my-3">
-              <h2 className="text-2xl font-semibold text-slate-600">
+            <div className="my-2 sm:my-5 flex justify-between">
+              <h2 className="text-base sm:text-2xl  font-semibold text-slate-600">
                 Recent places for sale
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:underline"
                 to={"/search?type=sale"}
               >
-                Show more places for sale
+                <button className="text-white sm:w-[128px] sm:h-[38px] w-[100px] h-[28px] sm:text-base text-xs font-semibold bg-[#A40D2C] p-1.5  border border-[#A40D2C] hover:text-[#A40D2C] uppercase hover:bg-white">
+                  Show More {">"}
+                </button>{" "}
               </Link>
             </div>
             <div className="flex flex-wrap gap-4">

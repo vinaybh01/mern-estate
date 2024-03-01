@@ -69,6 +69,7 @@ export default function Search() {
   }, [location.search]);
 
   const handleChange = (e) => {
+    console.log(e.target.id);
     if (
       e.target.id === "all" ||
       e.target.id === "rent" ||
@@ -131,111 +132,115 @@ export default function Search() {
     setListings([...listings, ...data]);
   };
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+    <div className="flex flex-col">
+      <div className="p-4 border-b-2 ">
+        <form onSubmit={handleSubmit} className="flex flex-wrap gap-4 justify-center">
           <div className="flex items-center gap-2">
-            <label className="whitespace-nowrap font-semibold">
-              Search Term:
-            </label>
             <input
               type="text"
               id="searchTerm"
-              placeholder="Search..."
-              className="border rounded-lg p-3 w-full"
+              placeholder="Search"
+              className="border rounded-lg p-[8px] w-full outline-none"
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
           </div>
+
           <div className="flex gap-2 flex-wrap items-center">
             <label className="font-semibold">Type:</label>
             <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="all"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.type === "all"}
-              />
-              <span>Rent & Sale</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="rent"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.type === "rent"}
-              />
-              <span>Rent</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="sale"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.type === "sale"}
-              />
-              <span>Sale</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="offer"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.offer}
-              />
-              <span>Offer</span>
+              <select
+                value={sidebardata.type}
+                onChange={(e) =>
+                  setSidebardata({ ...sidebardata, type: e.target.value })
+                }
+                className="border rounded-lg p-2 outline-none"
+              >
+                <option value="all">Rent & Sale</option>
+                <option value="rent">Rent</option>
+                <option value="sale">Sale</option>
+              </select>
             </div>
           </div>
+
           <div className="flex gap-2 flex-wrap items-center">
-            <label className="font-semibold">Amenities:</label>
+            <label className="font-semibold">Offer</label>
             <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="parking"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.parking}
-              />
-              <span>Parking</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="furnished"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Furnished</span>
+              <select
+                value={sidebardata.offer}
+                onChange={(e) =>
+                  setSidebardata({ ...sidebardata, offer: e.target.value })
+                }
+                className="border rounded-lg outline-none p-2"
+              >
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+              </select>
             </div>
           </div>
+
+          <div className="flex gap-2 flex-wrap items-center">
+            <label className="font-semibold">Parking</label>
+            <div className="flex gap-2">
+              <select
+                value={sidebardata.parking}
+                onChange={(e) =>
+                  setSidebardata({ ...sidebardata, parking: e.target.value })
+                }
+                className="border rounded-lg outline-none p-2"
+              >
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex gap-2 flex-wrap items-center">
+            <label className="font-semibold">Furnished</label>
+            <div className="flex gap-2">
+              <select
+                value={sidebardata.furnished}
+                onChange={(e) =>
+                  setSidebardata({ ...sidebardata, furnished: e.target.value })
+                }
+                className="border rounded-lg outline-none p-2"
+              >
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+              </select>
+            </div>
+          </div>
+
           <div className="flex items-center gap-2">
             <label className="font-semibold">Sort:</label>
             <select
               onChange={handleChange}
               defaultValue={"created_at_desc"}
               id="sort_order"
-              className="border rounded-lg p-3"
+              className="border rounded-lg p-3 outline-none"
             >
               <option value="regularPrice_desc">Price high to low</option>
-              <option value="regularPrice_asc">Price low to hight</option>
+              <option value="regularPrice_asc">Price low to high</option>
               <option value="createdAt_desc">Latest</option>
               <option value="createdAt_asc">Oldest</option>
             </select>
           </div>
-          <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
+          <button className="bg-[#A40D2C] text-white my-[4px] ml-[15px] px-[12px] rounded-md font-semibold uppercase ">
             Search
           </button>
         </form>
       </div>
-      <div className="flex-1">
-        <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
-          Listing results:
-        </h1>
+      {!loading && listings.length > 0 && (
+        <div className="flex justify-center sm:justify-start bg-[#02174A] text-white py-0.5 sm:py-1.5 sm:px-36">
+          {listings.length == 1 && (
+            <p className="">{listings.length} Property found</p>
+          )}
+          {listings.length > 1 && (
+            <p className="">{listings.length} Properties found</p>
+          )}
+        </div>
+      )}
+      <div className="flex-1 bg-white">
         <div className="p-7 flex flex-wrap gap-4">
           {!loading && listings.length === 0 && (
             <p className="text-xl text-slate-700">No Listing Found!</p>

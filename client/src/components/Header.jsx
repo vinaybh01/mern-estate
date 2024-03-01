@@ -26,12 +26,8 @@ function Header() {
 
   return (
     <header className="bg-[#FFFFFF] shadow-md h-14">
-      <div className="flex justify-between items-center mx-12">
+      <div className="flex justify-between items-center mx-3 sm:mx-12">
         <Link to="/">
-          {/* <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-            <span className="text-slate-500">Elite</span>
-            <span className="text-slate-700">EstatesHub</span>
-          </h1> */}
           <img
             src="https://www.longandfoster.com/images/Uploads/RECos/35009/ContentFiles/lf-logo.png"
             alt=""
@@ -54,7 +50,7 @@ function Header() {
             <FaSearch className="text-slate-600" />
           </button>
         </form> */}
-        <ul className="flex gap-8 font-semibold text-black max-w-6xl p-3">
+        <ul className="flex sm:gap-8 font-semibold text-black max-w-6xl py-3 sm:p-3">
           <Link to="/">
             <li className="hidden sm:inline hover:underline">HOME</li>
           </Link>
@@ -62,7 +58,9 @@ function Header() {
             <li className="hidden sm:inline  hover:underline ">ABOUT</li>
           </Link>
           <Link to="/search">
-            <li className="hidden sm:inline  hover:underline ">SEARCH</li>
+            <li className="inline hover:underline mr-4 text-sm sm:text-base sm:mr-0">
+              SEARCH
+            </li>
           </Link>
           <Link to="/profile">
             {currentUser ? (
@@ -72,7 +70,10 @@ function Header() {
                 alt="profile"
               />
             ) : (
-              <li className="  hover:underline"> SIGN IN</li>
+              <li className="inline hover:underline mr-1 text-sm sm:text-base sm:mr-0">
+                {" "}
+                SIGN IN
+              </li>
             )}
           </Link>
         </ul>

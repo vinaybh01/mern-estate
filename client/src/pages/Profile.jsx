@@ -179,9 +179,11 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <div className="p-5 m-6 rounded-lg  max-w-lg mx-auto bg-white">
+      <h1 className="text-2xl uppercase text-[#02174A] font-semibold text-center">
+        Profile
+      </h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           onChange={(e) => setFile(e.target.files[0])}
           type="file"
@@ -210,26 +212,26 @@ export default function Profile() {
         </p>
         <input
           type="text"
-          placeholder="username"
+          placeholder="Username"
           defaultValue={currentUser.username}
           id="username"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg bg-[#F1F5F1] outline-none"
           onChange={handleChange}
         />
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           id="email"
           defaultValue={currentUser.email}
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg bg-[#F1F5F1] outline-none"
           onChange={handleChange}
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={handleChange}
           id="password"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg bg-[#F1F5F1] outline-none"
         />
         <button
           disabled={loading}
