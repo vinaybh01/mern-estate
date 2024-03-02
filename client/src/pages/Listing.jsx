@@ -5,6 +5,7 @@ import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import { useSelector } from "react-redux";
 import "swiper/css/bundle";
+import { Link } from "react-router-dom";
 import {
   FaBath,
   FaBed,
@@ -14,7 +15,6 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
-import Contact from "../components/Contact";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -22,16 +22,30 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [contact, setContact] = useState(false);
+  const [landlord, setLandlord] = useState(null);
+  const [message, setMessage] = useState("");
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const breakpoint = 768;
+      setSlidesPerView(window.innerWidth < breakpoint ? 1 : 2);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(
-          `/api/listing/get/${params.listingId}`
-        );
+        const res = await fetch(`/api/listing/get/${params.listingId}`);
         const data = await res.json();
         if (data.success === false) {
           setError(true);
@@ -49,6 +63,23 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
+  const handleContactInfo = async () => {
+    const token = localStorage.getItem("access_token");
+    const res = await fetch(`/api/user/${listing.userRef}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    setLandlord(data);
+  };
+
+  const onChange = (e) => {
+    setMessage(e.target.value);
+  };
+
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
@@ -60,8 +91,8 @@ export default function Listing() {
           <Swiper
             navigation
             spaceBetween={10}
-            slidesPerView={2}
-            style={{ width: "100%", height: "450px" }} // Adjust the height as needed
+            slidesPerView={slidesPerView}
+            style={{ width: "100%", height: "450px" }}
           >
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
@@ -138,15 +169,45 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
-              >
-                Contact landlord
-              </button>
+            {currentUser &&
+              listing.userRef !== currentUser._id &&
+              !landlord && (
+                <button
+                  onClick={handleContactInfo}
+                  className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+                >
+                  Contact landlord
+                </button>
+              )}
+            {landlord && (
+              <div className="flex flex-col gap-2 mt-4">
+                <h2 className="text-lg font-bold uppercase">LandLord Info</h2>
+                <p>
+                  Name -{" "}
+                  <span className="font-semibold">{landlord.username}</span>
+                </p>
+                <p>
+                  Email Id -{" "}
+                  <span className="font-semibold">{landlord.email}</span>
+                </p>
+                <textarea
+                  name="message"
+                  id="message"
+                  rows="2"
+                  value={message}
+                  onChange={onChange}
+                  placeholder="Enter your message here..."
+                  className="w-full border p-3 rounded-lg"
+                ></textarea>
+
+                <Link
+                  to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
+                  className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
+                >
+                  Send Message
+                </Link>
+              </div>
             )}
-            {contact && <Contact listing={listing} />}{" "}
           </div>
         </div>
       )}
