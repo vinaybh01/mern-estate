@@ -73,17 +73,14 @@ export default function Profile() {
     try {
       dispatch(updateUserStart());
       const token = localStorage.getItem("access_token");
-      const res = await fetch(
-        `/api/user/update/${currentUser._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
@@ -156,15 +153,12 @@ export default function Profile() {
   const handleListingDelete = async (listingId) => {
     try {
       const token = localStorage.getItem("access_token");
-      const res = await fetch(
-        `/api/listing/delete/${listingId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
@@ -235,18 +229,20 @@ export default function Profile() {
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white rounded-lg p-2.5 uppercase hover:opacity-95 disabled:opacity-80"
         >
           {loading ? "Loading..." : "Update"}
         </button>
-        <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-          to={"/create-listing"}
-        >
-          Create Listing
-        </Link>
       </form>
-      <div className="flex justify-between mt-5">
+      <div className="flex flex-col my-3">
+        <button
+          className="bg-green-700 text-white rounded-lg p-2.5 uppercase hover:opacity-95 disabled:opacity-80"
+          onClick={() => handleListings()}
+        >
+          Show Listings
+        </button>
+      </div>
+      <div className="flex justify-between mt-2">
         <span
           onClick={handleDeleteUser}
           className="text-red-700 cursor-pointer"
@@ -264,18 +260,12 @@ export default function Profile() {
         {deleteSuccess ? "User is deleted successfully!" : ""}
       </p>
       <div>
-        <button
-          className="text-green-700 w-full"
-          onClick={() => handleListings()}
-        >
-          Show Listings
-        </button>
         <p className="text-red-700 mt-5">
           {showListingsError ? "Error showing listings" : ""}
         </p>
         {userListings && userListings.length > 0 && (
           <div className="flex flex-col gap-4">
-            <h1 className="text-center mt-7 text-2xl font-semibold">
+            <h1 className="text-center text-2xl font-semibold">
               Your Listings
             </h1>
             {userListings.map((listing) => (
