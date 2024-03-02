@@ -74,7 +74,7 @@ export default function Profile() {
       dispatch(updateUserStart());
       const token = localStorage.getItem("access_token");
       const res = await fetch(
-        `http://localhost:3000/api/user/update/${currentUser._id}`,
+        `/api/user/update/${currentUser._id}`,
         {
           method: "POST",
           headers: {
@@ -103,7 +103,7 @@ export default function Profile() {
       dispatch(deleteUserStart());
       const token = localStorage.getItem("access_token");
       const id = currentUser._id;
-      const res = await fetch(`http://localhost:3000/api/user/delete/${id}`, {
+      const res = await fetch(`/api/user/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export default function Profile() {
     try {
       const token = localStorage.getItem("access_token");
       const id = currentUser._id;
-      const res = await fetch(`http://localhost:3000/api/user/listings/${id}`, {
+      const res = await fetch(`/api/user/listings/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -157,7 +157,7 @@ export default function Profile() {
     try {
       const token = localStorage.getItem("access_token");
       const res = await fetch(
-        `http://localhost:3000/api/listing/delete/${listingId}`,
+        `/api/listing/delete/${listingId}`,
         {
           method: "DELETE",
           headers: {

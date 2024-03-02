@@ -13,7 +13,7 @@ export default function Contact({ listing }) {
       try {
         const token = localStorage.getItem("access_token");
         const res = await fetch(
-          `http://localhost:3000/api/user/${listing.userRef}`,
+          `api/user/${listing.userRef}`,
           {
             headers: {
               "Content-Type": "application/json",

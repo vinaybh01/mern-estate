@@ -132,7 +132,7 @@ export default function CreateListing() {
       setLoading(true);
       setError(false);
       const token = localStorage.getItem("access_token");
-      const res = await fetch("http://localhost:3000/api/listing/create", {
+      const res = await fetch("/api/listing/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

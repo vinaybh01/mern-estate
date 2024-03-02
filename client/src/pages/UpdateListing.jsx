@@ -37,7 +37,7 @@ export default function UpdateListing() {
     const fetchListing = async () => {
       const listingId = params.listingId;
       const res = await fetch(
-        `http://localhost:3000/api/listing/get/${listingId}`
+        `/api/listing/get/${listingId}`
       );
       const data = await res.json();
       if (data.success === false) {
@@ -155,7 +155,7 @@ export default function UpdateListing() {
       const token = localStorage.getItem("access_token");
       const listingId = params.listingId;
       const res = await fetch(
-        `http://localhost:3000/api/listing/update/${listingId}`,
+        `/api/listing/update/${listingId}`,
         {
           method: "POST",
           headers: {

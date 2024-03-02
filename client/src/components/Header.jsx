@@ -35,21 +35,6 @@ function Header() {
             height={"200px"}
           />
         </Link>
-        {/* <form
-          onSubmit={handleSubmit}
-          className="bg-slate-100 p-3 rounded-lg flex items-center"
-        >
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button>
-            <FaSearch className="text-slate-600" />
-          </button>
-        </form> */}
         <ul className="flex sm:gap-8 font-semibold text-black max-w-6xl py-3 sm:p-3">
           <Link to="/">
             <li className="hidden sm:inline hover:underline">HOME</li>
