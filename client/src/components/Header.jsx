@@ -39,12 +39,18 @@ function Header() {
           <Link to="/">
             <li className="hidden sm:inline hover:underline">HOME</li>
           </Link>
-          <Link to="/about">
-            <li className="hidden sm:inline  hover:underline ">ABOUT</li>
-          </Link>
           <Link to="/search">
-            <li className="inline hover:underline mr-4 text-sm sm:text-base sm:mr-0">
-              SEARCH
+            <li className="hidden sm:inline hover:underline">SEARCH</li>
+          </Link>
+          <Link to="/search?type=sale">
+            <li className="hidden sm:inline hover:underline">BUY</li>
+          </Link>
+          <Link to="/search?type=rent">
+            <li className="hidden sm:inline hover:underline">RENT</li>
+          </Link>
+          <Link to="/sell">
+            <li className="inline hover:underline mr-2 text-sm sm:text-base sm:mr-0">
+              SELL
             </li>
           </Link>
           <Link to="/profile">
@@ -55,7 +61,7 @@ function Header() {
                 alt="profile"
               />
             ) : (
-              <li className="inline hover:underline mr-1 text-sm sm:text-base sm:mr-0">
+              <li className="inline hover:underline text-sm sm:text-base mr-1 sm:mr-0">
                 {" "}
                 SIGN IN
               </li>
